@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BusFor.Models.DataModel.BusInfo>
+
+
+<div class="row">
+    <div class="col">Time1</div>
+    <div class="col">Time2</div>
+    <div class="col">Location1</div>
+    <div class="col">Location2</div>
+    <div class="col">Platform</div>
+    <div class="col">Price</div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col">@item.Time1</div>
+        <div class="col">@item.Location1</div>
+        <div class="col">@item.Location2</div>
+        <div class="col">@item.Time2</div>
+        <div class="col">@item.Platform</div>
+        <div class="col">@item.Price UAN</div>
+    </div>
+    <div class="text-center">
+        <form asp-action="DeleteRace" method="post">
+            <a asp-action="EditRace" class="btn btn-warning btn-sm"
+               asp-route-id="@item.Id">
+                Edit
+            </a>
+            <input type="hidden" name="id" value="@item.Id" />
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    </div>
+}
+
+<div class="text-center">
+    <a asp-action="CreateRace" asp-controller="Home" class="btn btn-success">Create Race</a>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-danger">Back</a>
+</div>

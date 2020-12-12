@@ -1,0 +1,66 @@
+﻿@model BusFor.Models.DataModel.BusInfo
+<h1>Create Race</h1>
+<form asp-controller="Home" asp-action="CreateRace" method="post">
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Time1"></label>
+                <input type="time" asp-for="Time1" class="form-control" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Time2"></label>
+                <input type="time" asp-for="Time2" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Date1"></label>
+                <input type="date" asp-for="Date1" class="form-control" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Date2"></label>
+                <input type="date" asp-for="Date2" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Location1"></label>
+                <input asp-for="Location1" class="form-control" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Location2"></label>
+                <input asp-for="Location2" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Platform"></label>
+                <input asp-for="Platform" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="ShowAllRaces" asp-controller="Home" class="btn btn-primary">
+            Cancel
+        </a>
+    </div>
+</form>
