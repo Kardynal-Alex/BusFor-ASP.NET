@@ -31,5 +31,9 @@ namespace BusFor.Models.DataBase
             context.BusInfos.Remove(new BusInfo { Id = id });
             context.SaveChanges();
         }
+        public IQueryable<BusInfo> FindRace(string Location1, string Location2, DateTime Date)
+        {
+            return context.BusInfos.Where(x => x.Location1 == Location1 && x.Location2 == Location2 && x.Date1 == Date).Select(x => x);
+        }
     }
 }

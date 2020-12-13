@@ -1,0 +1,51 @@
+﻿
+@using BusFor.Models.DataModel
+@{ 
+    BusInfo busInfo = ViewBag.BusInfo;
+    int[,] arr = new int[3, 10];
+    int k = 0;
+}
+<div class="row">
+    <div class="col">
+        <input class="form-control" value="@busInfo.Time1  @busInfo.Date1.ToShortDateString()" readonly="readonly">
+    </div>
+    <div class="col">@busInfo.Location1</div>
+    <div class="col">
+        <input class="form-control" value="@busInfo.Time2  @busInfo.Date2.ToShortDateString()" readonly="readonly">
+    </div>
+    <div class="col">@busInfo.Location2</div>
+</div>
+
+<div class="row">
+    @for (int j = 0; j < arr.GetLength(1); j++)
+    {   
+    <div class="col">
+        @for (int i = 0; i < arr.GetLength(0); i++)
+        {
+            @if (k < 20)
+            {
+                <div>
+                    <a asp-action="EnterDataToBuyTicket"
+                       asp-controller="Home"
+                       asp-route-place="@(arr[i, j] = ++k)"
+                       class="btn btn-danger">
+                        @(arr[i, j] = k)
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <a asp-action="EnterDataToBuyTicket"
+                       asp-controller="Home"
+                       asp-route-place="@(arr[i, j] = ++k)"
+                       class="btn btn-danger">
+                        @(arr[i, j] = k)
+                    </a>
+                </div>
+            }
+        }
+    </div>
+    }
+</div>
+

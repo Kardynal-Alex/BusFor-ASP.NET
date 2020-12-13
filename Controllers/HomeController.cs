@@ -21,8 +21,23 @@ namespace BusFor.Controllers
 
         public IActionResult Index()
         {
-            var TodaysRaces = repository.GetTodaysRaces();
+            var TodaysRaces = repository.GetTodaysRaces().OrderBy(x=>x.Time1);
             return View(TodaysRaces);
+        }
+        public IActionResult FindRace(string Location1, string Location2, DateTime Date)
+        {
+            var findRace = repository.FindRace(Location1, Location2, Date).OrderBy(x => x.Time1);
+            return View(findRace);
+        }
+        public IActionResult BuyTicket(int id)
+        {
+            ViewBag.BusInfo = repository.GetRaceById(id);
+            return View();
+        }
+        public IActionResult EnterDataToBuyTicket(int place)
+        {
+
+            return View();
         }
         public IActionResult ShowAllRaces()
         {

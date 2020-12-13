@@ -13,5 +13,6 @@ namespace BusFor.Models.DataBase
         public BusInfo GetRaceById(int id);
         public void UpdateRace(BusInfo updateRace);
         public void DeleteRace(int id);
+        public IQueryable<BusInfo> FindRace(string Location1, string Location2, DateTime Date);
     }
 }

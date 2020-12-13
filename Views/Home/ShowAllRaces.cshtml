@@ -3,9 +3,11 @@
 
 <div class="row">
     <div class="col">Time1</div>
-    <div class="col">Time2</div>
+    <div class="col">Date1</div>
     <div class="col">Location1</div>
     <div class="col">Location2</div>
+    <div class="col">Time2</div>
+    <div class="col">Date2</div>
     <div class="col">Platform</div>
     <div class="col">Price</div>
 </div>
@@ -13,9 +15,11 @@
 {
     <div class="row">
         <div class="col">@item.Time1</div>
+        <div class="col">@item.Date1.ToShortDateString()</div>
         <div class="col">@item.Location1</div>
         <div class="col">@item.Location2</div>
         <div class="col">@item.Time2</div>
+        <div class="col">@item.Date2.ToShortDateString()</div>
         <div class="col">@item.Platform</div>
         <div class="col">@item.Price UAN</div>
     </div>

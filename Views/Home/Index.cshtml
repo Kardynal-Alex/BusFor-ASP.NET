@@ -7,9 +7,9 @@
 </div>
 <div class="row p-2">
     <div class="col">Time1</div>
-    <div class="col">Time2</div>
     <div class="col">Location1</div>
     <div class="col">Location2</div>
+    <div class="col">Time2</div>
     <div class="col">Platform</div>
 </div>
 @foreach (var item in Model)
@@ -23,4 +23,15 @@
     </div>
 }
 
+<div class="row">
+    <form asp-action="FindRace" method="get" class="form-inline">
+        <div class="col">From</div>
+        <input class="form-control" name="Location1" />
+        <div class="col">To</div>
+        <input class="form-control" name="Location2" />
+        <div class="col">Date</div>
+        <input type="date" class="form-control" name="Date">
+        <input type="submit" value="Find" class="btn btn-success" />
+    </form>
+</div>
 
