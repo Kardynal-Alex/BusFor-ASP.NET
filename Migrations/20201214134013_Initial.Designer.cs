@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusFor.Migrations
 {
     [DbContext(typeof(EFDatabaseContext))]
-    [Migration("20201212103153_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201214134013_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,7 +70,7 @@ namespace BusFor.Migrations
                     b.Property<int>("BusInfoId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("DateRace")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")

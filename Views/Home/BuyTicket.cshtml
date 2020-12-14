@@ -1,9 +1,10 @@
 ﻿
 @using BusFor.Models.DataModel
-@{ 
+@{
     BusInfo busInfo = ViewBag.BusInfo;
     int[,] arr = new int[3, 10];
     int k = 0;
+    List<int> ListPlace = ViewBag.List;
 }
 <div class="row">
     <div class="col">
@@ -18,34 +19,57 @@
 
 <div class="row">
     @for (int j = 0; j < arr.GetLength(1); j++)
-    {   
-    <div class="col">
-        @for (int i = 0; i < arr.GetLength(0); i++)
-        {
-            @if (k < 20)
+    {
+        <div class="col">
+            @for (int i = 0; i < arr.GetLength(0); i++)
             {
-                <div>
-                    <a asp-action="EnterDataToBuyTicket"
-                       asp-controller="Home"
-                       asp-route-place="@(arr[i, j] = ++k)"
-                       class="btn btn-danger">
-                        @(arr[i, j] = k)
-                    </a>
-                </div>
+                @if (k < 20)
+                {
+                    <div>
+                        <a asp-action="BuyTicket"
+                           asp-controller="Home"
+                           asp-route-place="@(arr[i, j] = ++k)"
+                           asp-route-id="@ViewBag.raceId"
+                           class="btn btn-danger">
+                            @(arr[i, j] = k)
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <a asp-action="BuyTicket"
+                           asp-controller="Home"
+                           asp-route-place="@(arr[i, j] = ++k)"
+                           asp-route-id="@ViewBag.raceId"
+                           class="btn btn-danger">
+                            @(arr[i, j] = k)
+                        </a>
+                    </div>
+                }
             }
-            else
-            {
-                <div>
-                    <a asp-action="EnterDataToBuyTicket"
-                       asp-controller="Home"
-                       asp-route-place="@(arr[i, j] = ++k)"
-                       class="btn btn-danger">
-                        @(arr[i, j] = k)
-                    </a>
-                </div>
-            }
-        }
-    </div>
+        </div>
     }
 </div>
+
+    @for (int i = 0; i < ListPlace.Count; i++)
+    {
+        <div class="col">
+            Place: @ListPlace[i]
+            <a asp-action="BuyTicket"
+               asp-controller="Home"
+               asp-route-removePlace="@ListPlace[i]"
+               class="btn btn-danger">x
+            </a>
+        </div>
+    }
+
+@if(ListPlace.Count>0)
+{
+    <div class="text-right">
+        <a asp-action="EnterDataToBuyTicket" asp-controller="Home"
+           asp-route-raceId="@ViewBag.raceId"
+           class="btn btn-success">Buy Ticket</a>
+    </div>
+}
 

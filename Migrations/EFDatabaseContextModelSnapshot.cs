@@ -68,7 +68,7 @@ namespace BusFor.Migrations
                     b.Property<int>("BusInfoId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("DateRace")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")

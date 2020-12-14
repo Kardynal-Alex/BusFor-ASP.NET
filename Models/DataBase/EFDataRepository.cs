@@ -35,5 +35,10 @@ namespace BusFor.Models.DataBase
         {
             return context.BusInfos.Where(x => x.Location1 == Location1 && x.Location2 == Location2 && x.Date1 == Date).Select(x => x);
         }
+        public void AddPassengers(List<Passenger> Passengers)
+        {
+            context.Passengers.AddRange(Passengers);
+            context.SaveChanges();
+        }
     }
 }

@@ -1,4 +1,8 @@
 ﻿@model BusFor.Models.DataModel.BusInfo
+@{
+    Layout = "_Layout";
+}
+
 <h1>Create Race</h1>
 <form asp-controller="Home" asp-action="CreateRace" method="post">
     <div class="row p-2">
@@ -6,12 +10,14 @@
             <div class="form-group">
                 <label asp-for="Time1"></label>
                 <input type="time" asp-for="Time1" class="form-control" />
+                <span asp-validation-for="Time1" class="text-danger"></span>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
                 <label asp-for="Time2"></label>
                 <input type="time" asp-for="Time2" class="form-control" />
+                <span asp-validation-for="Time2" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -20,12 +26,14 @@
             <div class="form-group">
                 <label asp-for="Date1"></label>
                 <input type="date" asp-for="Date1" class="form-control" />
+                <span asp-validation-for="Date1" class="text-danger"></span>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
                 <label asp-for="Date2"></label>
                 <input type="date" asp-for="Date2" class="form-control" />
+                <span asp-validation-for="Date2" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -34,12 +42,14 @@
             <div class="form-group">
                 <label asp-for="Location1"></label>
                 <input asp-for="Location1" class="form-control" />
+                <span asp-validation-for="Location1" class="text-danger"></span>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
                 <label asp-for="Location2"></label>
                 <input asp-for="Location2" class="form-control" />
+                <span asp-validation-for="Location2" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -48,12 +58,14 @@
             <div class="form-group">
                 <label asp-for="Price"></label>
                 <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
                 <label asp-for="Platform"></label>
                 <input asp-for="Platform" class="form-control" />
+                <span asp-validation-for="Platform" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -64,3 +76,8 @@
         </a>
     </div>
 </form>
+@section scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

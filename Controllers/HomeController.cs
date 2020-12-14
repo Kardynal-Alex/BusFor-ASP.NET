@@ -29,15 +29,36 @@ namespace BusFor.Controllers
             var findRace = repository.FindRace(Location1, Location2, Date).OrderBy(x => x.Time1);
             return View(findRace);
         }
-        public IActionResult BuyTicket(int id)
+        public static List<int> ListPlace = new List<int>();
+        public IActionResult BuyTicket(int id, int place,int removePlace)
         {
+            if (!ListPlace.Contains(place) && place != 0) 
+            {
+                ListPlace.Add(place);
+            }
+            if (ListPlace.Contains(removePlace) && removePlace != 0) 
+            {
+                ListPlace.Remove(removePlace);
+            }
             ViewBag.BusInfo = repository.GetRaceById(id);
+            ViewBag.raceId = id;
+            ViewBag.List = ListPlace;
             return View();
         }
-        public IActionResult EnterDataToBuyTicket(int place)
+        public IActionResult EnterDataToBuyTicket(int raceId)
+        {
+            ViewBag.ListPlace = ListPlace;
+            var BusInfo = repository.GetRaceById(raceId);
+            ViewBag.Date = BusInfo.Date1;
+            ViewBag.raceId = raceId;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EnterDataToBuyTicket(List<Passenger> Passengers)
         {
 
-            return View();
+            //repository.AddPassengers(Passengers);
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult ShowAllRaces()
         {
