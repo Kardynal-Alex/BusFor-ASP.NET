@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusFor.Models.DataModel;
 using BusFor.Models.DataBase;
+using BusFor.Models.Service;
 namespace BusFor.Controllers
 {
     public class HomeController : Controller
@@ -21,11 +22,17 @@ namespace BusFor.Controllers
 
         public IActionResult Index()
         {
+            var firstBusInfo = repository.GetFirstBusInfo();
+            if (firstBusInfo.Date1 < DateTime.Now.Date) 
+            {
+                repository.DeletePassengers();
+            }
             var TodaysRaces = repository.GetTodaysRaces().OrderBy(x=>x.Time1);
             return View(TodaysRaces);
         }
         public IActionResult FindRace(string Location1, string Location2, DateTime Date)
         {
+            ListPlace.Clear();
             var findRace = repository.FindRace(Location1, Location2, Date).OrderBy(x => x.Time1);
             return View(findRace);
         }
@@ -40,9 +47,11 @@ namespace BusFor.Controllers
             {
                 ListPlace.Remove(removePlace);
             }
-            ViewBag.BusInfo = repository.GetRaceById(id);
+            var race = repository.GetRaceById(id);
+            ViewBag.BusInfo = race;
             ViewBag.raceId = id;
             ViewBag.List = ListPlace;
+            ViewBag.SoldPlace = repository.CountPlaceCurRace(race.Date1, id);
             return View();
         }
         public IActionResult EnterDataToBuyTicket(int raceId)
@@ -54,10 +63,16 @@ namespace BusFor.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult EnterDataToBuyTicket(List<Passenger> Passengers)
+        public async Task<IActionResult> EnterDataToBuyTicket(List<Passenger> Passengers)
         {
+            /*Passenger passenger = new Passenger();
+            passenger = Passengers[0];
 
-            //repository.AddPassengers(Passengers);
+            EmailBusService emailBusService = new EmailBusService();
+            await emailBusService.SendEmailAsync(passenger);*/
+            
+            ListPlace.Clear();
+            repository.AddPassengers(Passengers);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult ShowAllRaces()
@@ -72,8 +87,16 @@ namespace BusFor.Controllers
         [HttpPost]
         public IActionResult CreateRace(BusInfo busInfo)
         {
-            repository.CreateRace(busInfo);
-            return RedirectToAction(nameof(ShowAllRaces));
+            if (busInfo.Date1 > busInfo.Date2) 
+            {
+                ModelState.AddModelError("Date1", "Date1 must be less equal than Date2");
+            }
+            else
+            {
+                repository.CreateRace(busInfo);
+                return RedirectToAction(nameof(ShowAllRaces));
+            }
+            return View();
         }
         public IActionResult EditRace(int id)
         {

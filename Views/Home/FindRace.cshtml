@@ -1,32 +1,43 @@
 ﻿@model IQueryable<BusFor.Models.DataModel.BusInfo>
 @using System
-
-@foreach (var item in Model)
+@{
+    int count = Model.Count();
+}
+@if (count > 0)
 {
-<div class="row">
-    <div class="col btn btn-success" >
-        <input class="form-control text-center" value="@item.Time1" readonly="readonly">
-        <div>@item.Location1</div>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col btn btn-success">
+                <input class="form-control text-center" value="@item.Time1" readonly="readonly">
+                <div>@item.Location1</div>
+            </div>
+
+            <div class="col btn btn-block">
+                ----
+                @if (item.Date1 == item.Date2)
+                {
+                    @(item.Time2 - item.Time1)
+                }
+                else
+                {
+                    @((TimeSpan.Parse("23:59:59") - item.Time1 + item.Time2))
+                }
+                ----
+            </div>
+            <div class="col btn btn-danger">
+                <input class="form-control text-center" value="@item.Time2" readonly="readonly">
+                <div>@item.Location2</div>
+            </div>
+            <div class="col">
+                <a asp-action="BuyTicket" asp-controller="Home" class="btn btn-success" asp-route-id="@item.Id">Buy Ticket</a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="text-center">
+        <h3>Not fount race on current date</h3>
     </div>
-    
-    <div class="col btn btn-block">
-        ----
-        @if (item.Date1 == item.Date2)
-        {
-            @(item.Time2-item.Time1)
-        }
-        else
-        {
-            @((TimeSpan.Parse("23:59:59")-item.Time1+item.Time2))
-        }
-        ----
-    </div>
-    <div class="col btn btn-danger">
-        <input class="form-control text-center" value="@item.Time2" readonly="readonly">
-        <div>@item.Location2</div>
-    </div>
-    <div class="col">
-        <a asp-action="BuyTicket" asp-controller="Home" class="btn btn-success" asp-route-id="@item.Id">Buy Ticket</a>
-    </div>
-</div>
 }

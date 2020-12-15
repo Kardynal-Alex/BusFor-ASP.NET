@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusFor.Migrations
 {
     [DbContext(typeof(EFDatabaseContext))]
-    [Migration("20201214134013_Initial")]
-    partial class Initial
+    [Migration("20201215093227_New")]
+    partial class New
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,12 +35,15 @@ namespace BusFor.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location2")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Platform")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
@@ -73,18 +76,23 @@ namespace BusFor.Migrations
                     b.Property<DateTime>("DateRace")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Place")
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Passengers");
+                    b.ToTable("BusPassengers");
                 });
 #pragma warning restore 612, 618
         }

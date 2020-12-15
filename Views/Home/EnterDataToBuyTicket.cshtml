@@ -25,6 +25,11 @@
                     <span asp-validation-for="@Model[i].Age" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="@Model[i].Email"></label>
+                    <input asp-for="@Model[i].Email" class="form-control" />
+                    <span asp-validation-for="@Model[i].Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="@Model[i].Place"></label>
                     <input asp-for="@Model[i].Place" value="@PlaceList[i]" class="form-control" readonly="readonly" />
                 </div>

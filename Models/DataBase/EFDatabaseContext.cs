@@ -7,6 +7,6 @@ namespace BusFor.Models.DataBase
         public EFDatabaseContext(DbContextOptions<EFDatabaseContext> opt) : base(opt) { }
 
         public DbSet<BusInfo> BusInfos { get; set; }
-        public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<Passenger> BusPassengers { get; set; }
     }
 }

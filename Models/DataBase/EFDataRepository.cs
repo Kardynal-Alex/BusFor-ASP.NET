@@ -37,8 +37,22 @@ namespace BusFor.Models.DataBase
         }
         public void AddPassengers(List<Passenger> Passengers)
         {
-            context.Passengers.AddRange(Passengers);
+            context.BusPassengers.AddRange(Passengers);
             context.SaveChanges();
+        }
+        public int[] CountPlaceCurRace(DateTime DateRace, int raceId)
+        {
+            return context.BusPassengers.Where(x => x.DateRace == DateRace && x.BusInfoId == raceId).Select(x => x.Place).ToArray();
+        }
+        public void DeletePassengers()
+        {
+            List<Passenger> passengers = context.BusPassengers.Where(x => x.DateRace < DateTime.Now.Date).Select(x => x).ToList();
+            context.BusPassengers.RemoveRange(passengers);
+            context.SaveChanges();
+        }
+        public BusInfo GetFirstBusInfo()
+        {
+            return context.BusInfos.FirstOrDefault();
         }
     }
 }

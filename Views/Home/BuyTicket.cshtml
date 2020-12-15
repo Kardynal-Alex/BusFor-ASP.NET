@@ -5,6 +5,7 @@
     int[,] arr = new int[3, 10];
     int k = 0;
     List<int> ListPlace = ViewBag.List;
+    int[] SoldPlace = ViewBag.SoldPlace;
 }
 <div class="row">
     <div class="col">
@@ -30,8 +31,9 @@
                            asp-controller="Home"
                            asp-route-place="@(arr[i, j] = ++k)"
                            asp-route-id="@ViewBag.raceId"
-                           class="btn btn-danger">
-                            @(arr[i, j] = k)
+                           class="@(ListPlace.Contains(arr[i,j])? "btn btn-warning":
+                            (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))"
+                           >@(arr[i, j] = k)
                         </a>
                     </div>
                 }
@@ -42,8 +44,9 @@
                            asp-controller="Home"
                            asp-route-place="@(arr[i, j] = ++k)"
                            asp-route-id="@ViewBag.raceId"
-                           class="btn btn-danger">
-                            @(arr[i, j] = k)
+                           class="@(ListPlace.Contains(arr[i,j])? "btn btn-warning":
+                            (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))"
+                           >@(arr[i, j] = k)
                         </a>
                     </div>
                 }

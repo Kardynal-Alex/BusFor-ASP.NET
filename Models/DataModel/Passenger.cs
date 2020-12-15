@@ -16,6 +16,9 @@ namespace BusFor.Models.DataModel
         [Range(1, 120, ErrorMessage = "Out of range")]
         [Display(Name = "Passenger`s age")]
         public int Age { get; set; }
+        [Required(ErrorMessage = "Enter Email")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Incorect email")]
+        public string Email { get; set; }
         public int Place { get; set; }
         public DateTime DateRace { get; set; }
         public int BusInfoId { get; set; }

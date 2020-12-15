@@ -31,10 +31,16 @@ namespace BusFor
             string conString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<EFDatabaseContext>(option => option.UseSqlServer(conString));
             services.AddTransient<IDataRepository, EFDataRepository>();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(options =>
                {
-                   options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                   options.LoginPath = new PathString("/Account/Login");
                });
             services.AddHttpsRedirection(options =>
             {
@@ -61,7 +67,7 @@ namespace BusFor
 
             app.UseAuthorization();
             app.UseAuthentication();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
