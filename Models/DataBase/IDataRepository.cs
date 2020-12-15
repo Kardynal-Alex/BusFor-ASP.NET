@@ -16,7 +16,8 @@ namespace BusFor.Models.DataBase
         public IQueryable<BusInfo> FindRace(string Location1, string Location2, DateTime Date);
         public void AddPassengers(List<Passenger> Passengers);
         public int[] CountPlaceCurRace(DateTime DateRace, int raceId);
-        public void DeletePassengers();
+        public Task DeletePassengers();
         public BusInfo GetFirstBusInfo();
+        public Task UpdateRaces();
     }
 }

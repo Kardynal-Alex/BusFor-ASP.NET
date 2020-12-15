@@ -19,16 +19,24 @@ namespace BusFor.Controllers
         {
             repository = repo;
         }
-
         public IActionResult Index()
         {
-            var firstBusInfo = repository.GetFirstBusInfo();
-            if (firstBusInfo.Date1 < DateTime.Now.Date) 
-            {
-                repository.DeletePassengers();
-            }
-            var TodaysRaces = repository.GetTodaysRaces().OrderBy(x=>x.Time1);
+            return View();
+        }
+        public IActionResult BusSystem()
+        {
+            var TodaysRaces = repository.GetTodaysRaces().OrderBy(x => x.Time1);
             return View(TodaysRaces);
+        }
+        public async Task<IActionResult> UpdateRaces()
+        {
+            var firstBusInfo = repository.GetFirstBusInfo();
+            if (firstBusInfo.Date1 < DateTime.Now.Date)
+            {
+                await repository.DeletePassengers();
+                await repository.UpdateRaces();
+            }
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult FindRace(string Location1, string Location2, DateTime Date)
         {
@@ -65,12 +73,12 @@ namespace BusFor.Controllers
         [HttpPost]
         public async Task<IActionResult> EnterDataToBuyTicket(List<Passenger> Passengers)
         {
-            /*Passenger passenger = new Passenger();
-            passenger = Passengers[0];
-
-            EmailBusService emailBusService = new EmailBusService();
-            await emailBusService.SendEmailAsync(passenger);*/
-            
+            var busInfo = repository.GetRaceById(Passengers[0].BusInfoId);
+            foreach (var item in Passengers)
+            {
+                EmailBusService emailBusService = new EmailBusService();
+                await emailBusService.SendEmailAsync(item,busInfo);
+            }
             ListPlace.Clear();
             repository.AddPassengers(Passengers);
             return RedirectToAction(nameof(Index));
@@ -87,7 +95,7 @@ namespace BusFor.Controllers
         [HttpPost]
         public IActionResult CreateRace(BusInfo busInfo)
         {
-            if (busInfo.Date1 > busInfo.Date2) 
+            if (busInfo.Date1 > busInfo.Date2 && busInfo.Date1 >= DateTime.Now.Date && busInfo.Date2 >= DateTime.Now.Date)   
             {
                 ModelState.AddModelError("Date1", "Date1 must be less equal than Date2");
             }

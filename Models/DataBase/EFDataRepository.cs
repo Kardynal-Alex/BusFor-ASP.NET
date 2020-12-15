@@ -44,15 +44,23 @@ namespace BusFor.Models.DataBase
         {
             return context.BusPassengers.Where(x => x.DateRace == DateRace && x.BusInfoId == raceId).Select(x => x.Place).ToArray();
         }
-        public void DeletePassengers()
+        public async Task DeletePassengers()
         {
             List<Passenger> passengers = context.BusPassengers.Where(x => x.DateRace < DateTime.Now.Date).Select(x => x).ToList();
             context.BusPassengers.RemoveRange(passengers);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
-        public BusInfo GetFirstBusInfo()
+        public BusInfo GetFirstBusInfo() => context.BusInfos.FirstOrDefault();
+        public async Task UpdateRaces()
         {
-            return context.BusInfos.FirstOrDefault();
+            List<BusInfo> ListRaces = context.BusInfos.ToList();
+            foreach (var item in ListRaces)
+            {
+                item.Date1 = item.Date1.AddDays(1);
+                item.Date2 = item.Date2.AddDays(1);
+            }
+            context.BusInfos.UpdateRange(ListRaces);
+            await context.SaveChangesAsync();
         }
     }
 }

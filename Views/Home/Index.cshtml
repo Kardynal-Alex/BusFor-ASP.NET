@@ -1,37 +1,7 @@
-﻿@model IQueryable<BusFor.Models.DataModel.BusInfo>
-@{
-    Layout = "_Layout";
-}
-<div class="text-center">
-    <h1>Today`s Races</h1>
-</div>
-<div class="row p-2">
-    <div class="col">Time1</div>
-    <div class="col">Location1</div>
-    <div class="col">Location2</div>
-    <div class="col">Time2</div>
-    <div class="col">Platform</div>
-</div>
-@foreach (var item in Model)
-{
-    <div class="row p-2">
-        <div class="col">@item.Time1</div>
-        <div class="col">@item.Location1</div>
-        <div class="col">@item.Location2</div>
-        <div class="col">@item.Time2</div>
-        <div class="col">@item.Platform</div>
+﻿
+<div class="row text-center">
+    <div class="col">
+        <a asp-action="BusSystem" asp-controller="Home" class="btn btn-primary">Bus Ticket</a>
+        <a asp-action="" asp-controller="" class="btn btn-primary">Train Ticket</a>
     </div>
-}
-
-<div class="row">
-    <form asp-action="FindRace" method="get" class="form-inline">
-        <div class="col">From</div>
-        <input class="form-control" name="Location1" />
-        <div class="col">To</div>
-        <input class="form-control" name="Location2" />
-        <div class="col">Date</div>
-        <input type="date" class="form-control" name="Date">
-        <input type="submit" value="Find" class="btn btn-success" />
-    </form>
 </div>
-
