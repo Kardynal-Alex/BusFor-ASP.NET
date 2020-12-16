@@ -30,7 +30,7 @@
                 <div>@item.Location2</div>
             </div>
             <div class="col">
-                <a asp-action="BuyTicket" asp-controller="Home" class="btn btn-success" asp-route-id="@item.Id">Buy Ticket</a>
+                <a asp-action="BuyTicket" asp-controller="Home" class="btn btn-success" asp-route-id="@item.Id">@item.Price UAN</a>
             </div>
         </div>
     }

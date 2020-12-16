@@ -24,32 +24,16 @@
         <div class="col">
             @for (int i = 0; i < arr.GetLength(0); i++)
             {
-                @if (k < 20)
-                {
-                    <div>
-                        <a asp-action="BuyTicket"
-                           asp-controller="Home"
-                           asp-route-place="@(arr[i, j] = ++k)"
-                           asp-route-id="@ViewBag.raceId"
-                           class="@(ListPlace.Contains(arr[i,j])? "btn btn-warning":
-                            (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))"
-                           >@(arr[i, j] = k)
-                        </a>
-                    </div>
-                }
-                else
-                {
-                    <div>
-                        <a asp-action="BuyTicket"
-                           asp-controller="Home"
-                           asp-route-place="@(arr[i, j] = ++k)"
-                           asp-route-id="@ViewBag.raceId"
-                           class="@(ListPlace.Contains(arr[i,j])? "btn btn-warning":
-                            (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))"
-                           >@(arr[i, j] = k)
-                        </a>
-                    </div>
-                }
+                <div>
+                    <a asp-action="BuyTicket"
+                       asp-controller="Home"
+                       asp-route-place="@(arr[i, j] = ++k)"
+                       asp-route-id="@ViewBag.raceId"
+                       class="@(ListPlace.Contains(arr[i,j])? "btn btn-warning":
+                                (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))">
+                        @(arr[i, j] = k)
+                    </a>
+                </div>        
             }
         </div>
     }

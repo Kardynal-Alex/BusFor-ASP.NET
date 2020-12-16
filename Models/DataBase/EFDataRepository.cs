@@ -13,32 +13,32 @@ namespace BusFor.Models.DataBase
         {
             context = ctx;
         }
-        public void CreateRace(BusInfo createRace)
+        public async Task CreateRace(BusInfo createRace)
         {
             context.BusInfos.Add(createRace);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         public IQueryable<BusInfo> GetAllRaces() => context.BusInfos;
         public IQueryable<BusInfo> GetTodaysRaces() => context.BusInfos.Where(x => x.Date1 == DateTime.Now.Date).Select(x => x);
         public BusInfo GetRaceById(int id) => context.BusInfos.Find(id);
-        public void UpdateRace(BusInfo updateRace)
+        public async Task UpdateRace(BusInfo updateRace)
         {
             context.BusInfos.Update(updateRace);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
-        public void DeleteRace(int id)
+        public async Task DeleteRace(int id)
         {
             context.BusInfos.Remove(new BusInfo { Id = id });
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         public IQueryable<BusInfo> FindRace(string Location1, string Location2, DateTime Date)
         {
             return context.BusInfos.Where(x => x.Location1 == Location1 && x.Location2 == Location2 && x.Date1 == Date).Select(x => x);
         }
-        public void AddPassengers(List<Passenger> Passengers)
+        public async Task AddPassengers(List<Passenger> Passengers)
         {
             context.BusPassengers.AddRange(Passengers);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         public int[] CountPlaceCurRace(DateTime DateRace, int raceId)
         {

@@ -40,9 +40,13 @@
                 <input type="hidden" asp-for="@Model[i].BusInfoId" value="@ViewBag.raceId" />
             </div>
         }
+        <div class="col">
+            <h3>Total Price : @ViewBag.TotalPrice UAN</h3>
+        </div>
         <button class="btn btn-primary" type="submit">Finish</button>
     </form>
 </div>
+
 
 @section scripts
 {

@@ -68,6 +68,7 @@ namespace BusFor.Controllers
             var BusInfo = repository.GetRaceById(raceId);
             ViewBag.Date = BusInfo.Date1;
             ViewBag.raceId = raceId;
+            ViewBag.TotalPrice = BusInfo.Price * (ListPlace.Count());
             return View();
         }
         [HttpPost]
@@ -80,7 +81,7 @@ namespace BusFor.Controllers
                 await emailBusService.SendEmailAsync(item,busInfo);
             }
             ListPlace.Clear();
-            repository.AddPassengers(Passengers);
+            await repository.AddPassengers(Passengers);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult ShowAllRaces()
@@ -93,7 +94,7 @@ namespace BusFor.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateRace(BusInfo busInfo)
+        public async Task<IActionResult> CreateRace(BusInfo busInfo)
         {
             if (busInfo.Date1 > busInfo.Date2 && busInfo.Date1 >= DateTime.Now.Date && busInfo.Date2 >= DateTime.Now.Date)   
             {
@@ -101,7 +102,7 @@ namespace BusFor.Controllers
             }
             else
             {
-                repository.CreateRace(busInfo);
+                await repository.CreateRace(busInfo);
                 return RedirectToAction(nameof(ShowAllRaces));
             }
             return View();
@@ -111,15 +112,15 @@ namespace BusFor.Controllers
             return View(repository.GetRaceById(id));
         }
         [HttpPost]
-        public IActionResult EditRace(BusInfo busInfo)
+        public async Task<IActionResult> EditRace(BusInfo busInfo)
         {
-            repository.UpdateRace(busInfo);
+            await repository.UpdateRace(busInfo);
             return RedirectToAction(nameof(ShowAllRaces));
         }
         [HttpPost]
-        public IActionResult DeleteRace(int id)
+        public async Task<IActionResult> DeleteRace(int id)
         {
-            repository.DeleteRace(id);
+            await repository.DeleteRace(id);
             return RedirectToAction(nameof(ShowAllRaces));
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
