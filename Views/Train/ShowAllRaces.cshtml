@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BusFor.Models.DataModel.TrainInfo>
+
+
+<div class="row">
+    <div class="col">Time1</div>
+    <div class="col">Date1</div>
+    <div class="col">Location1</div>
+    <div class="col">Location2</div>
+    <div class="col">Time2</div>
+    <div class="col">Date2</div>
+    <div class="col">Platform</div>
+    <div class="col">PKPrice</div>
+    <div class="col">CPrice</div>
+    <div class="col">NumOfPK</div>
+    <div class="col">NumOfC</div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col">@item.Time1</div>
+        <div class="col">@item.Date1.ToShortDateString()</div>
+        <div class="col">@item.Location1</div>
+        <div class="col">@item.Location2</div>
+        <div class="col">@item.Time2</div>
+        <div class="col">@item.Date2.ToShortDateString()</div>
+        <div class="col">@item.Platform</div>
+        <div class="col">@item.PlatzKartePrice UAN</div>
+        <div class="col">@item.CoupePrice UAN</div>
+        <div class="col">@item.NumberOfPlatzKarte</div>
+        <div class="col">@item.NumberOfCoupe</div>
+    </div>
+    <div class="text-center">
+        <form asp-action="DeleteRace" asp-controller="Train" method="post">
+            <a asp-action="EditRace" asp-controller="Train" class="btn btn-warning btn-sm"
+               asp-route-id="@item.Id">
+                Edit
+            </a>
+            <input type="hidden" name="id" value="@item.Id" />
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    </div>
+}
+
+<div class="text-center">
+    <a asp-action="CreateRace" asp-controller="Train" class="btn btn-success">Create Race</a>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-danger">Back</a>
+</div>

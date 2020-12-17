@@ -8,5 +8,7 @@ namespace BusFor.Models.DataBase
 
         public DbSet<BusInfo> BusInfos { get; set; }
         public DbSet<Passenger> BusPassengers { get; set; }
+        public DbSet<TrainInfo> TrainInfos { get; set; }
+        public DbSet<TrainPassenger> TrainPassengers { get; set; }
     }
 }
