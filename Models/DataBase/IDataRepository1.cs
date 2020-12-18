@@ -14,5 +14,6 @@ namespace BusFor.Models.DataBase
         public TrainInfo GetRaceById(int id);
         public IQueryable<TrainInfo> GetTodaysRaces();
         public IQueryable<TrainInfo> FindRace(string Location1, string Location2, DateTime Date);
+        public Task AddPassengers(List<TrainPassenger> Passengers);
     }
 }

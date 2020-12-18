@@ -8,6 +8,9 @@
     List<VanPlace> ListVanPlace = ViewBag.ListVanPlace;
     int VanPlaceCount = ListVanPlace.Count();
 }
+<div class="text-center">
+    <h2>Coupe</h2>
+</div>
 <div class="row">
     <div class="col">
         <input class="form-control" value="@trainInfo.Time1  @trainInfo.Date1.ToShortDateString()" readonly="readonly">
@@ -73,3 +76,12 @@
     }
 }
 
+@if (VanPlaceCount > 0) 
+{
+    <div class="text-right">
+        <a asp-action="EnterDataToBuyTicket" asp-controller="Train"
+           asp-route-raceId="@ViewBag.raceId"
+           asp-route-mode="P"
+           class="btn btn-success">Buy Ticket</a>
+    </div>
+}

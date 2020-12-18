@@ -96,11 +96,17 @@ namespace BusFor.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRace(BusInfo busInfo)
         {
-            if (busInfo.Date1 > busInfo.Date2 && busInfo.Date1 >= DateTime.Now.Date && busInfo.Date2 >= DateTime.Now.Date)   
+            if (busInfo.Date1 > busInfo.Date2 || busInfo.Date1 < DateTime.Now.Date || busInfo.Date2 < DateTime.Now.Date)    
             {
-                ModelState.AddModelError("Date1", "Date1 must be less equal than Date2");
+                ModelState.AddModelError("Date1" , "Date1 must be less equal than Date2");
             }
             else
+            if (busInfo.Date1 == busInfo.Date2 && busInfo.Time1 >= busInfo.Time2)
+            {
+                ModelState.AddModelError("Time1", "Time1 must be less equal than Time2");
+            }
+            else
+            if (ModelState.IsValid)
             {
                 await repository.CreateRace(busInfo);
                 return RedirectToAction(nameof(ShowAllRaces));
@@ -114,8 +120,22 @@ namespace BusFor.Controllers
         [HttpPost]
         public async Task<IActionResult> EditRace(BusInfo busInfo)
         {
-            await repository.UpdateRace(busInfo);
-            return RedirectToAction(nameof(ShowAllRaces));
+            if (busInfo.Date1 > busInfo.Date2 || busInfo.Date1 < DateTime.Now.Date || busInfo.Date2 < DateTime.Now.Date)
+            {
+                ModelState.AddModelError("Date1", "Date1 must be less equal than Date2");
+            }
+            else
+            if (busInfo.Date1 == busInfo.Date2 && busInfo.Time1 >= busInfo.Time2)
+            {
+                ModelState.AddModelError("Time1", "Time1 must be less equal than Time2");
+            }
+            else
+            if (ModelState.IsValid)
+            {
+                await repository.UpdateRace(busInfo);
+                return RedirectToAction(nameof(ShowAllRaces));
+            }
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> DeleteRace(int id)

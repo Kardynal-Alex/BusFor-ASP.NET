@@ -47,6 +47,7 @@ namespace BusFor.Models.Service
             text.Append("<div class=\"col\">")
                         .Append("<h3>" + passenger.Name + " " + passenger.Surname + "</h3>")
                         .Append("<h3> Place : " + passenger.Place + "</h3>")
+                        .Append("<h3> Price : " + busInfo.Price + " UAN </h3>")
                     .Append("</div>");
 
             text.Append("</body>")
