@@ -8,6 +8,11 @@ namespace BusFor.Models.DataBase
     public interface IDataRepository1
     {
         public Task CreateRace(TrainInfo trainInfo);
+        public Task DeleteRace(int id);
+        public Task UpdateRace(TrainInfo trainInfo);
         public IQueryable<TrainInfo> GetAllRaces();
+        public TrainInfo GetRaceById(int id);
+        public IQueryable<TrainInfo> GetTodaysRaces();
+        public IQueryable<TrainInfo> FindRace(string Location1, string Location2, DateTime Date);
     }
 }

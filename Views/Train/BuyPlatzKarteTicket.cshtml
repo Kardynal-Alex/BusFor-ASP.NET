@@ -1,0 +1,75 @@
+﻿@using BusFor.Models.DataModel
+@using System;
+@{
+    TrainInfo trainInfo = ViewBag.TrainInfo;
+    int[,] arr = new int[3, 18];
+    int k = 0;
+    string[] VanArray = ViewBag.VanArray;
+    List<VanPlace> ListVanPlace = ViewBag.ListVanPlace;
+    int VanPlaceCount = ListVanPlace.Count();
+}
+<div class="row">
+    <div class="col">
+        <input class="form-control" value="@trainInfo.Time1  @trainInfo.Date1.ToShortDateString()" readonly="readonly">
+    </div>
+    <div class="col">@trainInfo.Location1</div>
+    <div class="col">
+        <input class="form-control" value="@trainInfo.Time2  @trainInfo.Date2.ToShortDateString()" readonly="readonly">
+    </div>
+    <div class="col">@trainInfo.Location2</div>
+</div>
+
+<div class="row">
+    @foreach (var item in VanArray)
+    {
+        <div>
+            <a asp-action="BuyPlatzKarteTicket"
+               asp-controller="Train"
+               asp-route-raceId="@ViewBag.raceId"
+               asp-route-van="@item"
+               class="@(ViewBag.CurVan==item ? "btn btn-success" : "btn btn-warning")">
+                @item
+            </a>
+        </div>
+    }
+</div>
+
+<div class="row">
+    @for (int j = 0; j < arr.GetLength(1); j++)
+    {
+        <div class="col">
+            @for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                <div>
+                    <a asp-action="BuyPlatzKarteTicket"
+                       asp-controller="Train"
+                       asp-route-raceId="@ViewBag.raceId"
+                       asp-route-place="@(arr[i,j]=++k)"
+                       asp-route-van="@ViewBag.CurVan">
+                        @(arr[i,j]=k)
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@if (VanPlaceCount > 0)
+{
+    @for (int i = 0; i < ListVanPlace.Count; i++)
+    {
+        <div class="col">
+            Van: @ListVanPlace[i].Van
+            Place: @ListVanPlace[i].Place
+            <a asp-action="BuyPlatzKarteTicket"
+               asp-controller="Train"
+               asp-route-raceId="@ViewBag.raceId"
+               asp-route-van="@ListVanPlace[i].Van"
+               asp-route-removePlace="@ListVanPlace[i].Place"
+               class="btn btn-danger">
+                x
+            </a>
+        </div>
+    }
+}
+

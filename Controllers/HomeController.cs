@@ -78,7 +78,7 @@ namespace BusFor.Controllers
             foreach (var item in Passengers)
             {
                 EmailBusService emailBusService = new EmailBusService();
-                await emailBusService.SendEmailAsync(item,busInfo);
+                await emailBusService.SendEmailAsync(item, busInfo);
             }
             ListPlace.Clear();
             await repository.AddPassengers(Passengers);

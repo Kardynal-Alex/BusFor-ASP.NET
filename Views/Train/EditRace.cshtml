@@ -1,0 +1,106 @@
+﻿@model BusFor.Models.DataModel.TrainInfo
+@{
+    Layout = "_Layout";
+}
+
+<h1>Edit Race</h1>
+<form asp-controller="Train" asp-action="EditRace" method="post">
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Time1"></label>
+                <input type="time" asp-for="Time1" class="form-control" />
+                <span asp-validation-for="Time1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Time2"></label>
+                <input type="time" asp-for="Time2" class="form-control" />
+                <span asp-validation-for="Time2" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Date1"></label>
+                <input type="date" asp-for="Date1" class="form-control" />
+                <span asp-validation-for="Date1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Date2"></label>
+                <input type="date" asp-for="Date2" class="form-control" />
+                <span asp-validation-for="Date2" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Location1"></label>
+                <input asp-for="Location1" class="form-control" />
+                <span asp-validation-for="Location1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Location2"></label>
+                <input asp-for="Location2" class="form-control" />
+                <span asp-validation-for="Location2" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="NumberOfPlatzKarte"></label>
+                <input asp-for="NumberOfPlatzKarte" class="form-control" />
+                <span asp-validation-for="NumberOfPlatzKarte" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="NumberOfCoupe"></label>
+                <input asp-for="NumberOfCoupe" class="form-control" />
+                <span asp-validation-for="NumberOfCoupe" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="PlatzKartePrice"></label>
+                <input asp-for="PlatzKartePrice" class="form-control" />
+                <span asp-validation-for="PlatzKartePrice" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="CoupePrice"></label>
+                <input asp-for="CoupePrice" class="form-control" />
+                <span asp-validation-for="CoupePrice" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group">
+            <label asp-for="Platform"></label>
+            <input asp-for="Platform" class="form-control" />
+            <span asp-validation-for="Platform" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="ShowAllRaces" asp-controller="Train" class="btn btn-primary">
+            Cancel
+        </a>
+    </div>
+</form>
+@section scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

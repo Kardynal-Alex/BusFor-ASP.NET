@@ -1,4 +1,4 @@
-﻿@model IQueryable<BusFor.Models.DataModel.BusInfo>
+﻿@model IQueryable<BusFor.Models.DataModel.TrainInfo>
 @using System
 @{
     int count = Model.Count();
@@ -30,13 +30,17 @@
                 <div>@item.Location2</div>
             </div>
             <div class="col">
-                <a asp-action="BuyTicket" 
-                   asp-controller="Home" 
-                   class="@(DateTime.Now.TimeOfDay < item.Time1 && DateTime.Now.Date == item.Date1 ? "btn btn-success" : "btn btn-success disabled")" 
-                   asp-route-id="@item.Id">@item.Price UAN
-                </a>
+                <div class="col">
+                    <a asp-action="BuyPlatzKarteTicket" asp-controller="Train"
+                       class="@(DateTime.Now.TimeOfDay < item.Time1 && DateTime.Now.Date == item.Date1 ? "btn btn-success" : "btn btn-success disabled")"
+                       asp-route-raceId="@item.Id">PlatzKarte @item.PlatzKartePrice UAN</a>
+                </div>
+                <div class="col">
+                    <a asp-action="BuyCoupeTicket" asp-controller="Train"
+                       class="@(DateTime.Now.TimeOfDay < item.Time1  && DateTime.Now.Date == item.Date1 ? "btn btn-success" : "btn btn-success disabled")"
+                       asp-route-raceId="@item.Id">Coupe @item.CoupePrice UAN</a>
+                </div>
             </div>
-
         </div>
     }
 }
