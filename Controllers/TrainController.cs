@@ -52,11 +52,19 @@ namespace BusFor.Controllers
             {
                 ListVanPlace.Remove(removeVanPlace);
             }
-            
+            if(van==0)
+            {
+                ViewBag.SoldPlace = repository1.CountPlaceCurRace(race.Date1, raceId, Convert.ToInt32(VanArray[0]), "P");
+            }
+            else
+            {
+                ViewBag.SoldPlace = repository1.CountPlaceCurRace(race.Date1, raceId, van, "P");
+            }
+
             ViewBag.TrainInfo = race;
             ViewBag.raceId = raceId;
             ViewBag.ListVanPlace = ListVanPlace;
-            
+
             ViewBag.VanArray = VanArray;
             ViewBag.CurVan = Convert.ToString(van) == "0" ? VanArray[0] : Convert.ToString(van);
             return View();
@@ -82,6 +90,14 @@ namespace BusFor.Controllers
             if (removeVanPlace != null && van != 0 && removePlace != 0)
             {
                 ListVanPlace.Remove(removeVanPlace);
+            }
+            if (van == 0)
+            {
+                ViewBag.SoldPlace = repository1.CountPlaceCurRace(race.Date1, raceId, Convert.ToInt32(VanArray[0]), "C");
+            }
+            else
+            {
+                ViewBag.SoldPlace = repository1.CountPlaceCurRace(race.Date1, raceId, van, "C");
             }
 
             ViewBag.TrainInfo = race;
@@ -112,7 +128,7 @@ namespace BusFor.Controllers
                 await emailTrainService.SendEmailAsync(item, trainInfo);
             }
             ListVanPlace.Clear();
-            //await repository1.AddPassengers(Passengers);
+            await repository1.AddPassengers(Passengers);
             return RedirectToRoute(new { Controller = "Home", Action = "Index" });
         }
         public IActionResult ShowAllRaces()

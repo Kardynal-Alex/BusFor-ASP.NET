@@ -7,6 +7,7 @@
     string[] VanArray = ViewBag.VanArray;
     List<VanPlace> ListVanPlace = ViewBag.ListVanPlace;
     int VanPlaceCount = ListVanPlace.Count();
+    int[] SoldPlace = ViewBag.SoldPlace;
 }
 <div class="text-center">
     <h2>Coupe</h2>
@@ -40,7 +41,7 @@
 <div class="row">
     @for (int j = 0; j < arr.GetLength(1); j++)
     {
-        <div class="col">
+        <div class="col p-2">
             @for (int i = 0; i < arr.GetLength(0); i++)
             {
                 <div>
@@ -48,7 +49,9 @@
                        asp-controller="Train"
                        asp-route-raceId="@ViewBag.raceId"
                        asp-route-place="@(arr[i,j]=++k)"
-                       asp-route-van="@ViewBag.CurVan">
+                       asp-route-van="@ViewBag.CurVan"
+                       class="@(ListVanPlace.Contains(new VanPlace { Van = ViewBag.raceId, Place = arr[i, j] })? "btn btn-warning":
+                                (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))">
                         @(arr[i,j]=k)
                     </a>
                 </div>

@@ -51,5 +51,10 @@ namespace BusFor.Models.DataBase
             context.TrainPassengers.AddRange(Passengers);
             await context.SaveChangesAsync();
         }
+        public int[] CountPlaceCurRace(DateTime dateRace, int raceId, int van, string Mode)
+        {
+            return context.TrainPassengers.Where(x => x.DateRace == dateRace && x.TrainInfoId == raceId && x.Mode == Mode && x.Van == van)
+                .Select(x => x.Place).ToArray();
+        }
     }
 }
