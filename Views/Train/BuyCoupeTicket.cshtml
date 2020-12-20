@@ -50,8 +50,10 @@
                        asp-route-raceId="@ViewBag.raceId"
                        asp-route-place="@(arr[i,j]=++k)"
                        asp-route-van="@ViewBag.CurVan"
-                       class="@(ListVanPlace.Contains(new VanPlace { Van = ViewBag.raceId, Place = arr[i, j] })? "btn btn-warning":
-                                (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))">
+                       asp-route-returnUrl="@ViewBag.returnUrl"
+                       class="@(ListVanPlace.Find(x => x.Van == Convert.ToInt32(ViewBag.CurVan) && x.Place == arr[i, j])!=null
+                             ?"btn btn-warning":(SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))"
+                       >
                         @(arr[i,j]=k)
                     </a>
                 </div>
@@ -72,6 +74,7 @@
                asp-route-raceId="@ViewBag.raceId"
                asp-route-van="@ListVanPlace[i].Van"
                asp-route-removePlace="@ListVanPlace[i].Place"
+               asp-route-returnUrl="@ViewBag.returnUrl"
                class="btn btn-danger">
                 x
             </a>
@@ -85,6 +88,11 @@
         <a asp-action="EnterDataToBuyTicket" asp-controller="Train"
            asp-route-raceId="@ViewBag.raceId"
            asp-route-mode="C"
+           asp-route-returnUrl="@ViewBag.returnUrl"
            class="btn btn-success">Buy Ticket</a>
     </div>
 }
+
+<div class="text-left">
+    <a class="btn btn-primary" href="@ViewBag.returnUrl">Back to races</a>
+</div>

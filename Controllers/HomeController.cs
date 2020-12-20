@@ -42,10 +42,11 @@ namespace BusFor.Controllers
         {
             ListPlace.Clear();
             var findRace = repository.FindRace(Location1, Location2, Date).OrderBy(x => x.Time1);
+            ViewBag.returnUrl = HttpContext.Request.Path.ToString() + HttpContext.Request.QueryString;
             return View(findRace);
         }
         public static List<int> ListPlace = new List<int>();
-        public IActionResult BuyTicket(int id, int place,int removePlace)
+        public IActionResult BuyTicket(int id, int place, int removePlace, string returnUrl)
         {
             if (!ListPlace.Contains(place) && place != 0) 
             {
@@ -60,6 +61,7 @@ namespace BusFor.Controllers
             ViewBag.raceId = id;
             ViewBag.List = ListPlace;
             ViewBag.SoldPlace = repository.CountPlaceCurRace(race.Date1, id);
+            ViewBag.returnUrl = returnUrl;
             return View();
         }
         public IActionResult EnterDataToBuyTicket(int raceId)

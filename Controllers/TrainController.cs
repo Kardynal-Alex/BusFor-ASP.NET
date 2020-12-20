@@ -24,13 +24,14 @@ namespace BusFor.Controllers
         {
             ListVanPlace.Clear();
             var findRace = repository1.FindRace(Location1, Location2, Date).OrderBy(x => x.Time1);
+            ViewBag.returnUrl = HttpContext.Request.Path.ToString() + HttpContext.Request.QueryString;
             return View(findRace);
         }
         public static List<VanPlace> ListVanPlace = new List<VanPlace>();
         public VanPlace vanPlace = null;
         public VanPlace isPlace = null;
         public VanPlace removeVanPlace = null;
-        public IActionResult BuyPlatzKarteTicket(int raceId, int van, int place, int removePlace)
+        public IActionResult BuyPlatzKarteTicket(int raceId, int van, int place, int removePlace, string returnUrl)
         {
             var race = repository1.GetRaceById(raceId);
             string[] VanArray = race.NumberOfPlatzKarte.Split('-');
@@ -64,12 +65,12 @@ namespace BusFor.Controllers
             ViewBag.TrainInfo = race;
             ViewBag.raceId = raceId;
             ViewBag.ListVanPlace = ListVanPlace;
-
+            ViewBag.returnUrl = returnUrl;
             ViewBag.VanArray = VanArray;
             ViewBag.CurVan = Convert.ToString(van) == "0" ? VanArray[0] : Convert.ToString(van);
             return View();
         }
-        public IActionResult BuyCoupeTicket(int raceId, int van, int place, int removePlace)
+        public IActionResult BuyCoupeTicket(int raceId, int van, int place, int removePlace, string returnUrl)
         {
             var race = repository1.GetRaceById(raceId);
             string[] VanArray = race.NumberOfCoupe.Split('-');
@@ -103,7 +104,7 @@ namespace BusFor.Controllers
             ViewBag.TrainInfo = race;
             ViewBag.raceId = raceId;
             ViewBag.ListVanPlace = ListVanPlace;
-
+            ViewBag.returnUrl = returnUrl;
             ViewBag.VanArray = VanArray;
             ViewBag.CurVan = Convert.ToString(van) == "0" ? VanArray[0] : Convert.ToString(van);
             return View();

@@ -29,6 +29,7 @@
                        asp-controller="Home"
                        asp-route-place="@(arr[i, j] = ++k)"
                        asp-route-id="@ViewBag.raceId"
+                       asp-route-returnUrl="@ViewBag.returnUrl"
                        class="@(ListPlace.Contains(arr[i,j])? "btn btn-warning":
                                 (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))">
                         @(arr[i, j] = k)
@@ -46,6 +47,7 @@
             <a asp-action="BuyTicket"
                asp-controller="Home"
                asp-route-removePlace="@ListPlace[i]"
+               asp-route-returnUrl="@ViewBag.returnUrl"
                class="btn btn-danger">x
             </a>
         </div>
@@ -60,3 +62,6 @@
     </div>
 }
 
+<div class="text-left">
+    <a class="btn btn-primary" href="@ViewBag.returnUrl">Back to races</a>
+</div>

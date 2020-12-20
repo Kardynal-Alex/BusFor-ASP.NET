@@ -14,7 +14,7 @@ namespace BusFor.Models.Service
         {
             MailMessage mm = new MailMessage("alexandrkardinal@gmail.com", passenger.Email);
             mm.Subject = "Bus Ticket";
-            mm.Body = await BodyHtmlText(passenger,busInfo);
+            mm.Body = BodyHtmlText(passenger,busInfo);
             mm.IsBodyHtml = true;
 
             SmtpClient smtp = new SmtpClient();
@@ -27,7 +27,7 @@ namespace BusFor.Models.Service
             smtp.Credentials = nc;
             smtp.Send(mm);
         }
-        public async Task<string> BodyHtmlText(Passenger passenger, BusInfo busInfo)
+        public string BodyHtmlText(Passenger passenger, BusInfo busInfo)
         {
             StringBuilder text = new StringBuilder();
             text.Append("<html>")

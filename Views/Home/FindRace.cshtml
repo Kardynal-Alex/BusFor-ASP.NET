@@ -33,7 +33,7 @@
                 <a asp-action="BuyTicket" 
                    asp-controller="Home" 
                    class="@(DateTime.Now.TimeOfDay < item.Time1 && DateTime.Now.Date == item.Date1 ? "btn btn-success" : "btn btn-success disabled")" 
-                   asp-route-id="@item.Id">@item.Price UAN
+                   asp-route-id="@item.Id" asp-route-returnUrl="@ViewBag.returnUrl">@item.Price UAN
                 </a>
             </div>
 

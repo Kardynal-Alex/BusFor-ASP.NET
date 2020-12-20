@@ -35,7 +35,7 @@
                     <div class="col">
                         <a asp-action="BuyPlatzKarteTicket" asp-controller="Train"
                            class="@(DateTime.Now.TimeOfDay < item.Time1 && DateTime.Now.Date == item.Date1 ? "btn btn-success" : "btn btn-success disabled")"
-                           asp-route-raceId="@item.Id">PlatzKarte @item.PlatzKartePrice UAN</a>
+                           asp-route-raceId="@item.Id" asp-route-returnUrl="@ViewBag.returnUrl">PlatzKarte @item.PlatzKartePrice UAN</a>
                     </div>
                 }
                 @if (item.NumberOfCoupe != null)
@@ -43,7 +43,7 @@
                     <div class="col">
                         <a asp-action="BuyCoupeTicket" asp-controller="Train"
                            class="@(DateTime.Now.TimeOfDay < item.Time1  && DateTime.Now.Date == item.Date1 ? "btn btn-success" : "btn btn-success disabled")"
-                           asp-route-raceId="@item.Id">Coupe @item.CoupePrice UAN</a>
+                           asp-route-raceId="@item.Id" asp-route-returnUrl="@ViewBag.returnUrl">Coupe @item.CoupePrice UAN</a>
                     </div>
                 }
 
