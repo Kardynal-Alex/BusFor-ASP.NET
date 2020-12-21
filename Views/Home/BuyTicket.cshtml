@@ -17,8 +17,16 @@
     </div>
     <div class="col">@busInfo.Location2</div>
 </div>
-
+<style>
+    .blocktext {
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 <div class="row">
+<div class="blocktext">
+    <div class="row">
     @for (int j = 0; j < arr.GetLength(1); j++)
     {
         <div class="col">
@@ -34,10 +42,17 @@
                                 (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))">
                         @(arr[i, j] = k)
                     </a>
-                </div>        
+                </div>      
+                @if(i==1)
+                {
+                    <pre></pre>
+                }
             }
         </div>
+       
     }
+    </div>
+</div>
 </div>
 
     @for (int i = 0; i < ListPlace.Count; i++)

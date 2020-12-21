@@ -1,0 +1,144 @@
+﻿@using BusFor.Models.DataModel
+@{
+    int m1 = 7; int n1 = 4;
+    int m2 = 8; int n2 = 6;
+    string[] s = { "A", "B", "C", "D", "E", "F" };
+    int k = 0;
+}
+
+<style>
+    .blocktext {
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+@*Business class*@
+<div class="col">
+    <div class="col">
+        <div class="col">
+            <div class="row">
+                <div class="blocktext">
+                    <div class="row">
+                        @for (int i = 0; i < n1; i++)
+                        {
+                            <div class="btn btn-secondary">@s[i]</div>
+                            @if (i == 1)
+                            {
+                                <pre>    </pre>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pre></pre>
+        @for (int i = 0; i < m1; i++)
+        {
+            <div class="col">
+                <div class="row">
+                    <div class="blocktext">
+                        <div class="row">
+                            <div class="btn btn-secondary">@(++k)</div>
+                            @for (int j = 0; j < n1; j++)
+                            {
+                                <div>
+                                    <div class="btn btn-danger"><pre> </pre></div>
+                                </div>
+                                @if (j == 1)
+                                {
+                                    <pre>    </pre>
+                                }
+                            }
+                            <div class="btn btn-secondary">@(k)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @*Econom class*@
+        <pre></pre>
+        <div class="col">
+            <div class="row">
+                <div class="blocktext">
+                    <div class="row">
+                        @for (int i = 0; i < n2; i++)
+                        {
+                            <div class="btn btn-secondary">@s[i]</div>
+                            @if (i == 2)
+                            {
+                                <pre>    </pre>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pre></pre>
+        @for (int i = 0; i < m2; i++)
+        {
+            <div class="col">
+                <div class="row">
+                    <div class="blocktext">
+                        <div class="row">
+                            <div class="btn btn-secondary">@(++k)</div>
+                            @for (int j = 0; j < n2; j++)
+                            {
+                                <div>
+                                    <div class="btn btn-danger"><pre> </pre></div>
+                                </div>
+                                @if (j == 2)
+                                {
+                                    <pre>    </pre>
+                                }
+                            }
+                            <div class="btn btn-secondary">@(k)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <pre></pre>
+        <div class="col">
+            <div class="row">
+                <div class="blocktext">
+                    <div class="row">
+                        @for (int i = 0; i < n2; i++)
+                        {
+                            <div class="btn btn-secondary">@s[i]</div>
+                            @if (i == 2)
+                            {
+                                <pre>    </pre>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pre></pre>
+        @for (int i = 0; i < m2 + 2; i++)
+        {
+            <div class="col">
+                <div class="row">
+                    <div class="blocktext">
+                        <div class="row">
+                            <div class="btn btn-secondary">@(++k)</div>
+                            @for (int j = 0; j < n2; j++)
+                            {
+                                <div>
+                                    <div class="btn btn-danger"><pre> </pre></div>
+                                </div>
+                                @if (j == 2)
+                                {
+                                    <pre>    </pre>
+                                }
+                            }
+                            <div class="btn btn-secondary">@(k)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

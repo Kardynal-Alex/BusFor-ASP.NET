@@ -2,7 +2,6 @@
 @using System;
 @{
     TrainInfo trainInfo = ViewBag.TrainInfo;
-    int[,] arr = new int[3, 18];
     int k = 0;
     string[] VanArray = ViewBag.VanArray;
     List<VanPlace> ListVanPlace = ViewBag.ListVanPlace;
@@ -10,7 +9,7 @@
     int[] SoldPlace = ViewBag.SoldPlace;
 }
 <div class="text-center">
-    <h2>Coupe</h2>
+    <h2>PlatzKarte</h2>
 </div>
 <div class="row">
     <div class="col">
@@ -40,22 +39,31 @@
 </div>
 
 <div class="row">
-    @for (int j = 0; j < arr.GetLength(1); j++)
+    @for (int j = 0; j < 9; j++)
     {
-        <div class="col p-2">
-            @for (int i = 0; i < arr.GetLength(0); i++)
+        <div class="row">
+            @for (int i = 0; i < 2; i++)
             {
-                <div>
-                    <a asp-action="BuyPlatzKarteTicket"
-                       asp-controller="Train"
-                       asp-route-raceId="@ViewBag.raceId"
-                       asp-route-place="@(arr[i,j]=++k)"
-                       asp-route-van="@ViewBag.CurVan"
-                       asp-route-returnUrl="@ViewBag.returnUrl"
-                       class="@(ListVanPlace.Find(x => x.Van == Convert.ToInt32(ViewBag.CurVan) && x.Place == arr[i, j])!=null
-                             ?"btn btn-warning":(SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))">
-                        @(arr[i, j] = k)
-                    </a>
+                <div class="col-4">
+                    @for (int p = 0; p < 3; p++)
+                    {
+                        <div>
+                            <a asp-action="BuyPlatzKarteTicket"
+                               asp-controller="Train"
+                               asp-route-raceId="@ViewBag.raceId"
+                               asp-route-place="@(++k)"
+                               asp-route-van="@ViewBag.CurVan"
+                               asp-route-returnUrl="@ViewBag.returnUrl"
+                               class="@(ListVanPlace.Find(x => x.Van == Convert.ToInt32(ViewBag.CurVan) && x.Place == k)!=null
+                                     ?"btn btn-warning":(SoldPlace.Contains(k)?"btn btn-success disabled" :"btn btn-danger"))">
+                                @k
+                            </a>
+                        </div>
+                        @if(p==1)
+                        { 
+                            <pre></pre>
+                        }
+                }
                 </div>
             }
         </div>

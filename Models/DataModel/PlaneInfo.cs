@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusFor.Models.DataModel
 {
-    public class TrainInfo
+    public class PlaneInfo
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Enter date of dispatch")]
@@ -27,21 +27,11 @@ namespace BusFor.Models.DataModel
         [Required(ErrorMessage = "Enter location of arrival")]
         [Display(Name = "Location of arrival")]
         public string Location2 { get; set; }
+        public double BusinessPrice { get; set; }
+        public double EconomPrice { get; set; }
         [Required(ErrorMessage = "Enter number of platform")]
         [Range(1, int.MaxValue, ErrorMessage = "Out of range")]
         [Display(Name = "Number of platform")]
         public int Platform { get; set; }
-        //[Required(ErrorMessage = "Enter number of Coupe(1-2-3-7)")]
-        [Display(Name = "Enter number of Coupe(1-2-3-7)")]
-        public string NumberOfCoupe { get; set; }
-        //[Required(ErrorMessage = "Enter number of PlatzKarte(4-5-6-8)")]
-        [Display(Name = "Enter number of PlatzKarte(4-5-6-8)")]
-        public string NumberOfPlatzKarte { get; set; }
-        [Required(ErrorMessage = "Enter CoupePrice")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Out of range")]
-        public double CoupePrice { get; set; }
-        [Required(ErrorMessage = "Enter PlatzKartePrice")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Out of range")]
-        public double PlatzKartePrice { get; set; }
     }
 }

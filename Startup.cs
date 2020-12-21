@@ -32,6 +32,7 @@ namespace BusFor
             services.AddDbContext<EFDatabaseContext>(option => option.UseSqlServer(conString));
             services.AddTransient<IDataRepository, EFDataRepository>();
             services.AddTransient<IDataRepository1, EFDataRepository1>();
+            services.AddTransient<IDataRepository2, EFDataRepository2>();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
