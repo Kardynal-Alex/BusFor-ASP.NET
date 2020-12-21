@@ -132,6 +132,16 @@ namespace BusFor.Controllers
             await repository1.AddPassengers(Passengers);
             return RedirectToRoute(new { Controller = "Home", Action = "Index" });
         }
+        public async Task<ActionResult> UpdateRaces()
+        {
+            var firstTrainInfo = repository1.GetFirstTrainInfo();
+            if(firstTrainInfo.Date1<DateTime.Now.Date)
+            {
+                await repository1.DeletePassengers();
+                await repository1.UpdateRaces();
+            }
+            return RedirectToRoute(new { Controller = "Home", Action = "Index" });
+        }
         public IActionResult ShowAllRaces()
         {
             var AllRaces = repository1.GetAllRaces();

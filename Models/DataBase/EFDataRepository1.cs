@@ -56,5 +56,23 @@ namespace BusFor.Models.DataBase
             return context.TrainPassengers.Where(x => x.DateRace == dateRace && x.TrainInfoId == raceId && x.Mode == Mode && x.Van == van)
                 .Select(x => x.Place).ToArray();
         }
+        public TrainInfo GetFirstTrainInfo() => context.TrainInfos.FirstOrDefault();
+        public async Task DeletePassengers()
+        {
+            List<TrainPassenger> passengers = context.TrainPassengers.Where(x => x.DateRace < DateTime.Now.Date).Select(x => x).ToList();
+            context.TrainPassengers.RemoveRange(passengers);
+            await context.SaveChangesAsync();
+        }
+        public async Task UpdateRaces()
+        {
+            List<TrainInfo> ListRaces = context.TrainInfos.ToList();
+            foreach (var item in ListRaces)
+            {
+                item.Date1 = item.Date1.AddDays(1);
+                item.Date2 = item.Date2.AddDays(1);
+            }
+            context.TrainInfos.UpdateRange(ListRaces);
+            await context.SaveChangesAsync();
+        }
     }
 }
