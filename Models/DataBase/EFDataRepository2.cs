@@ -44,5 +44,10 @@ namespace BusFor.Models.DataBase
         {
             return context.PlaneInfos.Where(x => x.Location1 == Location1 && x.Location2 == Location2 && x.Date1 == Date).Select(x => x);
         }
+        public async Task AddPassengers(List<PlanePassenger> Passengers)
+        {
+            context.PlanePassengers.AddRange(Passengers);
+            await context.SaveChangesAsync();
+        }
     }
 }

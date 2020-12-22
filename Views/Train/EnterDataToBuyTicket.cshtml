@@ -4,52 +4,63 @@
     List<VanPlace> ListVanPlace = ViewBag.ListVanPlace;
 }
 
-<div class="col">
+<div>
     <form asp-action="EnterDataToBuyTicket" asp-controller="Train" method="post">
         @for (int i = 0; i < ListVanPlace.Count(); i++)
         {
             <h3>Passenger @(i+1)</h3>
-            <div class="col">
-                <div class="form-group">
-                    <label asp-for="@Model[i].Name"></label>
-                    <input asp-for="@Model[i].Name" class="form-control" />
-                    <span asp-validation-for="@Model[i].Name" class="text-danger"></span>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Name"></label>
+                        <input asp-for="@Model[i].Name" class="form-control" />
+                        <span asp-validation-for="@Model[i].Name" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="@Model[i].Surname"></label>
-                    <input asp-for="@Model[i].Surname" class="form-control" />
-                    <span asp-validation-for="@Model[i].Surname" class="text-danger"></span>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Surname"></label>
+                        <input asp-for="@Model[i].Surname" class="form-control" />
+                        <span asp-validation-for="@Model[i].Surname" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="@Model[i].Email"></label>
-                    <input asp-for="@Model[i].Email" class="form-control" />
-                    <span asp-validation-for="@Model[i].Email" class="text-danger"></span>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Email"></label>
+                        <input asp-for="@Model[i].Email" class="form-control" />
+                        <span asp-validation-for="@Model[i].Email" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col form-group">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
                         <label asp-for="@Model[i].Van"></label>
                         <input asp-for="@Model[i].Van" value="@ListVanPlace[i].Van" class="form-control" readonly="readonly" />
                     </div>
-                    <div class="col form-group">
+                </div>
+                <div class="col">
+                    <div class="form-group">
                         <label asp-for="@Model[i].Place"></label>
                         <input asp-for="@Model[i].Place" value="@ListVanPlace[i].Place" class="form-control" readonly="readonly" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="@Model[i].DateRace"></label>
-                    <input type="text" asp-for="@Model[i].DateRace" value="@ViewBag.Date.ToShortDateString()" class="form-control" readonly="readonly" />
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].DateRace"></label>
+                        <input type="text" asp-for="@Model[i].DateRace" value="@ViewBag.Date.ToShortDateString()" class="form-control" readonly="readonly" />
+                    </div>
                 </div>
-                <div>
-                    <input type="checkbox" asp-for="@Model[i].IsPostel" value="true" />
-                    <span>Postel</span>
-                </div>
+            </div>
+            <div>
+                <input type="checkbox" asp-for="@Model[i].IsPostel" value="true" />
+                <span>Postel</span>
+            </div>
+            <div>
                 <input type="hidden" asp-for="@Model[i].TrainInfoId" value="@ViewBag.raceId" />
                 <input type="hidden" asp-for="@Model[i].Mode" value="@ViewBag.Mode" />
             </div>
         }
-        @*<div class="col">
-            <h3>Total Price : @ViewBag.TotalPrice UAN</h3>
-        </div>*@
         <button class="btn btn-primary" type="submit">Finish</button>
     </form>
 </div>

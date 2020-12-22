@@ -1,0 +1,100 @@
+﻿@model List<BusFor.Models.DataModel.PlanePassenger>
+@using BusFor.Models.DataModel;
+@{
+    List<IntStringPlace> PlaceList = ViewBag.ListPlace;
+}
+
+<div>
+    <form asp-action="EnterDataToBuyTicket" asp-controller="Plane" method="post">
+        @for (int i = 0; i < PlaceList.Count; i++)
+        {
+            <h3>Passenger @(i+1)</h3>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Surname"></label>
+                        <input asp-for="@Model[i].Surname" class="form-control" />
+                        <span asp-validation-for="@Model[i].Surname" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Name"></label>
+                        <input asp-for="@Model[i].Name" class="form-control" />
+                        <span asp-validation-for="@Model[i].Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Email"></label>
+                        <input asp-for="@Model[i].Email" class="form-control" />
+                        <span asp-validation-for="@Model[i].Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].PassengerDocument.Sex"></label>
+                        <select class="form-control" asp-for="@Model[i].PassengerDocument.Sex"
+                                asp-items="@new SelectList(Enum.GetNames(typeof(BusFor.Models.DataModel.SexEnum)))">
+                            <option disabled selected value="">Select Sex</option>
+                        </select>
+                        <span asp-validation-for="@Model[i].PassengerDocument.Sex" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].PassengerDocument.DateOfBirth"></label>
+                        <input type="date" asp-for="@Model[i].PassengerDocument.DateOfBirth" class="form-control" />
+                        <span asp-validation-for="@Model[i].PassengerDocument.DateOfBirth" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].PassengerDocument.Nationality"></label>
+                        <input asp-for="@Model[i].PassengerDocument.Nationality" class="form-control" placeholder="Ukraine" />
+                        <span asp-validation-for="@Model[i].PassengerDocument.Nationality" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].PassengerDocument.SeriesN"></label>
+                        <input asp-for="@Model[i].PassengerDocument.SeriesN" class="form-control" placeholder="RS123456" />
+                        <span asp-validation-for="@Model[i].PassengerDocument.SeriesN" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].PassengerDocument.Validity"></label>
+                        <input type="date" asp-for="@Model[i].PassengerDocument.Validity" class="form-control" />
+                        <span asp-validation-for="@Model[i].PassengerDocument.Validity" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="hidden" asp-for="@Model[i].PlaneInfoId" value="@ViewBag.raceId" />
+                <input type="hidden" asp-for="@Model[i].DateRace" value="@ViewBag.Date.ToShortDateString()" />
+                <input type="hidden" asp-for="@Model[i].IntPlace" value="@PlaceList[i].IntPlace" />
+                <input type="hidden" asp-for="@Model[i].StringPlace" value="@PlaceList[i].StringPlace" />
+                <input type="hidden" asp-for="@Model[i].PassengerDocument.DateRace" value="@ViewBag.Date.ToShortDateString()" />
+                @if (PlaceList[i].IntPlace <= 7)
+                {
+                    <input type="hidden" asp-for="@Model[i].Mode" value="B" />
+                }
+                else
+                {
+                    <input type="hidden" asp-for="@Model[i].Mode" value="E" />
+                }
+            </div>
+
+        }
+        <button class="btn btn-primary" type="submit">Finish</button>
+    </form>
+</div>
+
+@section scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -4,6 +4,8 @@
     int m2 = 8; int n2 = 6;
     string[] s = { "A", "B", "C", "D", "E", "F" };
     int k = 0;
+    List<IntStringPlace> ListPlace = ViewBag.ListPlace;
+    int ListPlaceCount = ListPlace.Count();
 }
 
 <style>
@@ -13,8 +15,11 @@
         margin-right: auto;
     }
 </style>
+<div class="text-left">
+    <a class="btn btn-primary" href="@ViewBag.returnUrl">Back to races</a>
+</div>
 @*Business class*@
-<div class="col">
+<div class="row">
     <div class="col">
         <div class="col">
             <div class="row">
@@ -43,7 +48,15 @@
                             @for (int j = 0; j < n1; j++)
                             {
                                 <div>
-                                    <div class="btn btn-danger"><pre> </pre></div>
+                                    <div class="btn btn-danger">
+                                        <a asp-action="BuyTicket"
+                                           asp-route-raceId="@ViewBag.RaceId"
+                                           asp-route-intPlace="@k"
+                                           asp-route-stringPlace="@s[j]"
+                                           asp-route-returnUrl="@ViewBag.returnUrl">
+                                            <pre> </pre>
+                                        </a>
+                                    </div>
                                 </div>
                                 @if (j == 1)
                                 {
@@ -85,7 +98,15 @@
                             @for (int j = 0; j < n2; j++)
                             {
                                 <div>
-                                    <div class="btn btn-danger"><pre> </pre></div>
+                                    <div class="btn btn-danger">
+                                        <a asp-action="BuyTicket"
+                                           asp-route-raceId="@ViewBag.RaceId"
+                                           asp-route-intPlace="@k"
+                                           asp-route-stringPlace="@s[j]"
+                                           asp-route-returnUrl="@ViewBag.returnUrl">
+                                            <pre> </pre>
+                                        </a>
+                                    </div>
                                 </div>
                                 @if (j == 2)
                                 {
@@ -126,7 +147,15 @@
                             @for (int j = 0; j < n2; j++)
                             {
                                 <div>
-                                    <div class="btn btn-danger"><pre> </pre></div>
+                                    <div class="btn btn-danger">
+                                        <a asp-action="BuyTicket"
+                                           asp-route-raceId="@ViewBag.RaceId"
+                                           asp-route-intPlace="@k"
+                                           asp-route-stringPlace="@s[j]"
+                                           asp-route-returnUrl="@ViewBag.returnUrl">
+                                            <pre> </pre>
+                                        </a>
+                                    </div>
                                 </div>
                                 @if (j == 2)
                                 {
@@ -137,6 +166,34 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        }
+    </div>
+    <div class="col">
+        @if (ListPlaceCount > 0)
+        {
+            @for (int i = 0; i < ListPlaceCount; i++)
+            {
+                <div class="col">
+                    Place @ListPlace[i].IntPlace @ListPlace[i].StringPlace
+                    <a asp-action="BuyTicket"
+                       asp-controller="Plane"
+                       asp-route-raceId="@ViewBag.raceId"
+                       asp-route-removePlace="@ListPlace[i].IntPlace"
+                       asp-route-stringPlace="@ListPlace[i].StringPlace"
+                       asp-route-returnUrl="@ViewBag.returnUrl"
+                       class="btn btn-danger">
+                        x
+                    </a>
+                </div>
+            }
+        }
+        @if (ListPlaceCount > 0)
+        {
+            <div>
+                <a asp-action="EnterDataToBuyTicket" asp-controller="Plane"
+                   asp-route-raceId="@ViewBag.raceId"
+                   class="btn btn-success">Buy Ticket</a>
             </div>
         }
     </div>

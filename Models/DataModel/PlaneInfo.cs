@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BusFor.Models.DataModel
 {
@@ -27,7 +24,11 @@ namespace BusFor.Models.DataModel
         [Required(ErrorMessage = "Enter location of arrival")]
         [Display(Name = "Location of arrival")]
         public string Location2 { get; set; }
+        [Required(ErrorMessage = "Enter Price for Business class")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Out of range")]
         public double BusinessPrice { get; set; }
+        [Required(ErrorMessage = "Enter Price for Econom class")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Out of range")]
         public double EconomPrice { get; set; }
         [Required(ErrorMessage = "Enter number of platform")]
         [Range(1, int.MaxValue, ErrorMessage = "Out of range")]

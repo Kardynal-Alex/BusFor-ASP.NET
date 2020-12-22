@@ -3,35 +3,47 @@
     List<int> PlaceList = ViewBag.ListPlace;
 }
 
-<div class="col">
+<div>
     <form asp-action="EnterDataToBuyTicket" asp-controller="Home" method="post">
         @for (int i = 0; i < PlaceList.Count; i++)
         {
             <h3>Passenger @(i+1)</h3>
-            <div class="col">
-                <div class="form-group">
-                    <label asp-for="@Model[i].Name"></label>
-                    <input asp-for="@Model[i].Name" class="form-control" />
-                    <span asp-validation-for="@Model[i].Name" class="text-danger"></span>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Name"></label>
+                        <input asp-for="@Model[i].Name" class="form-control" />
+                        <span asp-validation-for="@Model[i].Name" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="@Model[i].Surname"></label>
-                    <input asp-for="@Model[i].Surname" class="form-control" />
-                    <span asp-validation-for="@Model[i].Surname" class="text-danger"></span>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Surname"></label>
+                        <input asp-for="@Model[i].Surname" class="form-control" />
+                        <span asp-validation-for="@Model[i].Surname" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="@Model[i].Age"></label>
-                    <input asp-for="@Model[i].Age" class="form-control" />
-                    <span asp-validation-for="@Model[i].Age" class="text-danger"></span>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Age"></label>
+                        <input asp-for="@Model[i].Age" class="form-control" />
+                        <span asp-validation-for="@Model[i].Age" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="@Model[i].Email"></label>
-                    <input asp-for="@Model[i].Email" class="form-control" />
-                    <span asp-validation-for="@Model[i].Email" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Email"></label>
+                        <input asp-for="@Model[i].Email" class="form-control" />
+                        <span asp-validation-for="@Model[i].Email" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="@Model[i].Place"></label>
-                    <input asp-for="@Model[i].Place" value="@PlaceList[i]" class="form-control" readonly="readonly" />
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Place"></label>
+                        <input asp-for="@Model[i].Place" value="@PlaceList[i]" class="form-control" readonly="readonly" />
+                    </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model[i].DateRace"></label>

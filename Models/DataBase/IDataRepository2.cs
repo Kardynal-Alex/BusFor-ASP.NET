@@ -14,5 +14,6 @@ namespace BusFor.Models.DataBase
         public PlaneInfo GetRaceById(int id);
         public IQueryable<PlaneInfo> GetAllRaces();
         public IQueryable<PlaneInfo> FindRace(string Location1, string Location2, DateTime Date);
+        public Task AddPassengers(List<PlanePassenger> Passengers);
     }
 }

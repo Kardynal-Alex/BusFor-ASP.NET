@@ -33,7 +33,7 @@
                 <div class="col">
                     <a asp-action="BuyTicket" asp-controller="Plane"
                        class="@(DateTime.Now.TimeOfDay < item.Time1 && DateTime.Now.Date == item.Date1 ? "btn btn-success" : "btn btn-success disabled")"
-                       asp-route-raceId="@item.Id"> Buy Tickets </a>
+                       asp-route-raceId="@item.Id" asp-route-returnUrl="@ViewBag.returnUrl"> Buy Tickets </a>
                 </div>
             </div>
         </div>

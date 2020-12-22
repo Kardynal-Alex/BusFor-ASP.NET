@@ -1,8 +1,32 @@
 ﻿
-<div class="row text-center">
+<div class="blocktext">
     <div class="col">
-        <a asp-action="BusSystem" asp-controller="Home" class="btn btn-primary">Bus Ticket</a>
-        <a asp-action="TrainSystem" asp-controller="Train" class="btn btn-primary">Train Ticket</a>
-        <a asp-action="PlaneSystem" asp-controller="Plane" class="btn btn-primary">Plane Ticket</a>
+        <div class="col">
+            <a asp-action="BusSystem" asp-controller="Home" class="btn btn-primary">
+                <div class="textsize">Bus Ticket</div>
+            </a>
+            <pre></pre>
+        </div>
+        <div class="col">
+            <a asp-action="TrainSystem" asp-controller="Train" class="btn btn-primary">
+                <div class="textsize">Train Ticket</div>
+            </a>
+            <pre></pre>
+        </div>
+        <div class="col">
+            <a asp-action="PlaneSystem" asp-controller="Plane" class="btn btn-primary">
+                <div class="textsize">Plane Ticket</div>
+            </a>
+        </div>
     </div>
 </div>
+<style>
+    .blocktext {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center
+    }
+    .textsize {
+        font-size: 200%;
+    }
+</style>

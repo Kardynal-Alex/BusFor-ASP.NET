@@ -69,7 +69,7 @@
 
 @if (VanPlaceCount > 0)
 {
-    @for (int i = 0; i < ListVanPlace.Count; i++)
+    @for (int i = 0; i < VanPlaceCount; i++)
     {
         <div class="col">
             Van: @ListVanPlace[i].Van
@@ -93,7 +93,6 @@
         <a asp-action="EnterDataToBuyTicket" asp-controller="Train"
            asp-route-raceId="@ViewBag.raceId"
            asp-route-mode="C"
-           asp-route-returnUrl="@ViewBag.returnUrl"
            class="btn btn-success">Buy Ticket</a>
     </div>
 }
