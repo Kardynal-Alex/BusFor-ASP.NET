@@ -56,6 +56,8 @@ namespace BusFor.Controllers
             ViewBag.RaceId = raceId;
             ViewBag.ListPlace = ListPlace;
             ViewBag.returnUrl = returnUrl;
+            ViewBag.SoldPlace = repository2.SelectPlaceCurRace(race.Date1, race.Id);
+           
             return View();
         }
         public IActionResult EnterDataToBuyTicket(int raceId)
@@ -84,6 +86,16 @@ namespace BusFor.Controllers
         {
             var AllRaces = repository2.GetAllRaces();
             return View(AllRaces);
+        }
+        public async Task<ActionResult> UpdateRaces()
+        {
+            var firstPlaneInfo = repository2.GetFirstPlaneInfo();
+            if(firstPlaneInfo.Date1<DateTime.Now.Date)
+            {
+                await repository2.DeletePassengers();
+                await repository2.UpdateRaces();
+            }
+            return RedirectToRoute(new { Controller = "Home", Action = "Index" });
         }
         public IActionResult CreateRace()
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BusFor.Models.DataModel;
 namespace BusFor.Models.DataBase
 {
-    public class EFDataRepository2:IDataRepository2
+    public class EFDataRepository2 : IDataRepository2
     {
         private EFDatabaseContext context;
         public EFDataRepository2(EFDatabaseContext ctx)
@@ -47,6 +47,29 @@ namespace BusFor.Models.DataBase
         public async Task AddPassengers(List<PlanePassenger> Passengers)
         {
             context.PlanePassengers.AddRange(Passengers);
+            await context.SaveChangesAsync();
+        }
+        public List<IntStringPlace> SelectPlaceCurRace(DateTime dateRace, int raceId)
+        {
+            return context.PlanePassengers.Where(x => x.DateRace == dateRace && x.PlaneInfoId == raceId)
+                .Select(x => new IntStringPlace { IntPlace = x.IntPlace, StringPlace = x.StringPlace }).ToList();
+        }
+        public PlaneInfo GetFirstPlaneInfo() => context.PlaneInfos.FirstOrDefault();
+        public async Task DeletePassengers()
+        {
+            List<PlanePassenger> passengers = context.PlanePassengers.Where(x => x.DateRace < DateTime.Now.Date).Select(x => x).ToList();
+            context.PlanePassengers.RemoveRange(passengers);
+            await context.SaveChangesAsync();
+        }
+        public async Task UpdateRaces()
+        {
+            List<PlaneInfo> ListRaces = context.PlaneInfos.ToList();
+            foreach (var item in ListRaces)
+            {
+                item.Date1 = item.Date1.AddDays(1);
+                item.Date2 = item.Date2.AddDays(1);
+            }
+            context.PlaneInfos.UpdateRange(ListRaces);
             await context.SaveChangesAsync();
         }
     }

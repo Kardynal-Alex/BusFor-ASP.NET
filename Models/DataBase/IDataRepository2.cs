@@ -15,5 +15,9 @@ namespace BusFor.Models.DataBase
         public IQueryable<PlaneInfo> GetAllRaces();
         public IQueryable<PlaneInfo> FindRace(string Location1, string Location2, DateTime Date);
         public Task AddPassengers(List<PlanePassenger> Passengers);
+        public List<IntStringPlace> SelectPlaceCurRace(DateTime dateRace, int raceId);
+        public PlaneInfo GetFirstPlaneInfo();
+        public Task DeletePassengers();
+        public Task UpdateRaces();
     }
 }
