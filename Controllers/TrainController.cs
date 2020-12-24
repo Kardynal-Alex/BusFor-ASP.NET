@@ -41,19 +41,19 @@ namespace BusFor.Controllers
                 vanPlace = new VanPlace() { Van = van, Place = place };
                 isPlace = ListVanPlace.Where(x => x.Van == vanPlace.Van && x.Place == vanPlace.Place).FirstOrDefault();
             }
+            if (isPlace == null && van != 0 && place != 0)
+            {
+                ListVanPlace.Add(vanPlace);
+            }
             if (van != 0 && removePlace != 0)
             {
                 removeVanPlace = ListVanPlace.Where(x => x.Van == van && x.Place == removePlace).FirstOrDefault();
-            }
-            if (isPlace == null && van != 0 && place != 0) 
-            {
-                ListVanPlace.Add(vanPlace);
             }
             if (removeVanPlace != null && van != 0 && removePlace != 0)  
             {
                 ListVanPlace.Remove(removeVanPlace);
             }
-            if(van==0)
+            if (van == 0) 
             {
                 ViewBag.SoldPlace = repository1.CountPlaceCurRace(race.Date1, raceId, Convert.ToInt32(VanArray[0]), "P");
             }
@@ -80,13 +80,13 @@ namespace BusFor.Controllers
                 vanPlace = new VanPlace() { Van = van, Place = place };
                 isPlace = ListVanPlace.Where(x => x.Van == vanPlace.Van && x.Place == vanPlace.Place).FirstOrDefault();
             }
-            if (van != 0 && removePlace != 0)
-            {
-                removeVanPlace = ListVanPlace.Where(x => x.Van == van && x.Place == removePlace).FirstOrDefault();
-            }
             if (isPlace == null && van != 0 && place != 0)
             {
                 ListVanPlace.Add(vanPlace);
+            }
+            if (van != 0 && removePlace != 0)
+            {
+                removeVanPlace = ListVanPlace.Where(x => x.Van == van && x.Place == removePlace).FirstOrDefault();
             }
             if (removeVanPlace != null && van != 0 && removePlace != 0)
             {
@@ -135,7 +135,7 @@ namespace BusFor.Controllers
         public async Task<ActionResult> UpdateRaces()
         {
             var firstTrainInfo = repository1.GetFirstTrainInfo();
-            if(firstTrainInfo.Date1<DateTime.Now.Date)
+            if (firstTrainInfo.Date1 < DateTime.Now.Date) 
             {
                 await repository1.DeletePassengers();
                 await repository1.UpdateRaces();

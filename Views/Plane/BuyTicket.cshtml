@@ -7,6 +7,7 @@
     List<IntStringPlace> ListPlace = ViewBag.ListPlace;
     int ListPlaceCount = ListPlace.Count();
     List<IntStringPlace> SoldPlace = ViewBag.SoldPlace;
+    bool flag1, flag2, flag3;
 }
 
 <style>
@@ -16,6 +17,7 @@
         margin-right: auto;
     }
 </style>
+
 <div class="text-left">
     <a class="btn btn-primary" href="@ViewBag.returnUrl">Back to races</a>
 </div>
@@ -52,10 +54,11 @@
                                     <div>
                                         <a asp-action="BuyTicket"
                                            asp-route-raceId="@ViewBag.RaceId"
-                                           asp-route-intPlace="@k"
+                                           asp-route-removePlace="@((flag1 = (ListPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null ? true : false) == true) ? k : 0)"
+                                           asp-route-intPlace="@(flag1 == false ? k : 0)"
                                            asp-route-stringPlace="@s[j]"
                                            asp-route-returnUrl="@ViewBag.returnUrl"
-                                           class="@(ListPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null
+                                           class="@(flag1 == true
                               ? "btn btn-warning" :(SoldPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null
                               ? "btn btn-success disabled" : "btn btn-danger"))">
                                             <pre> </pre>
@@ -105,10 +108,11 @@
                                     <div>
                                         <a asp-action="BuyTicket"
                                            asp-route-raceId="@ViewBag.RaceId"
-                                           asp-route-intPlace="@k"
+                                           asp-route-removePlace="@((flag2 = (ListPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null ? true : false) == true) ? k : 0)"
+                                           asp-route-intPlace="@(flag2 == false ? k : 0)"
                                            asp-route-stringPlace="@s[j]"
                                            asp-route-returnUrl="@ViewBag.returnUrl"
-                                           class="@(ListPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null
+                                           class="@(flag2 == true
                               ? "btn btn-warning" :(SoldPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null
                               ? "btn btn-success disabled" : "btn btn-danger"))">
                                             <pre> </pre>
@@ -153,14 +157,16 @@
                             <div class="btn btn-secondary">@(++k)</div>
                             @for (int j = 0; j < n2; j++)
                             {
+
                                 <div>
                                     <div>
                                         <a asp-action="BuyTicket"
                                            asp-route-raceId="@ViewBag.RaceId"
-                                           asp-route-intPlace="@k"
+                                           asp-route-removePlace="@((flag3 = (ListPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null ? true : false) == true) ? k : 0)"
+                                           asp-route-intPlace="@(flag3 == false ? k : 0)"
                                            asp-route-stringPlace="@s[j]"
                                            asp-route-returnUrl="@ViewBag.returnUrl"
-                                           class="@(ListPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null
+                                           class="@(flag3 == true
                               ? "btn btn-warning" :(SoldPlace.Find(x => x.IntPlace == k && x.StringPlace == s[j]) != null
                               ? "btn btn-success disabled" : "btn btn-danger"))">
                                             <pre> </pre>

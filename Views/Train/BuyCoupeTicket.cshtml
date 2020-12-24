@@ -2,11 +2,12 @@
 @using System;
 @{
     TrainInfo trainInfo = ViewBag.TrainInfo;
-    int k = 0;
+    int k = 1;
     string[] VanArray = ViewBag.VanArray;
     List<VanPlace> ListVanPlace = ViewBag.ListVanPlace;
     int VanPlaceCount = ListVanPlace.Count();
     int[] SoldPlace = ViewBag.SoldPlace;
+    bool flag;
 }
 <div class="text-center">
     <h2>Coupe</h2>
@@ -45,17 +46,18 @@
             @for (int i = 0; i < 2; i++)
             {
                 <div class="col-4">
-                    @for (int p = 0; p < 2; p++)
+                    @for (int p = 0; p < 2; p++,k++)
                      {
                         <div>
                             <a asp-action="BuyCoupeTicket"
                                asp-controller="Train"
                                asp-route-raceId="@ViewBag.raceId"
-                               asp-route-place="@(++k)"
+                               asp-route-place="@((flag = (ListVanPlace.Find(x => x.Van == Convert.ToInt32(ViewBag.CurVan) && x.Place == k) != null)
+                                        ? true : false)==false ? k:0)"
+                               asp-route-removePlace="@(flag==true ? k:0)"
                                asp-route-van="@ViewBag.CurVan"
                                asp-route-returnUrl="@ViewBag.returnUrl"
-                               class="@(ListVanPlace.Find(x => x.Van == Convert.ToInt32(ViewBag.CurVan) && x.Place == k) != null
-                                            ? "btn btn-warning" : (SoldPlace.Contains(k) ? "btn btn-success disabled" : "btn btn-danger"))">
+                               class="@(flag == true ? "btn btn-warning" : (SoldPlace.Contains(k) ? "btn btn-success disabled" : "btn btn-danger"))">
                                 @(k)
                             </a>
                         </div>

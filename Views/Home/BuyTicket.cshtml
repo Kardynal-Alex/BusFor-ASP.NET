@@ -2,10 +2,11 @@
 @using BusFor.Models.DataModel
 @{
     BusInfo busInfo = ViewBag.BusInfo;
-    int[,] arr = new int[3, 10];
-    int k = 0;
+    int k = 1;
+    int m = 3; int n = 10;
     List<int> ListPlace = ViewBag.List;
     int[] SoldPlace = ViewBag.SoldPlace;
+    bool flag;
 }
 <div class="row">
     <div class="col">
@@ -27,20 +28,20 @@
 <div class="row">
 <div class="blocktext">
     <div class="row">
-    @for (int j = 0; j < arr.GetLength(1); j++)
+    @for (int j = 0; j < n; j++)
     {
         <div class="col">
-            @for (int i = 0; i < arr.GetLength(0); i++)
+            @for (int i = 0; i < m; i++,k++)
             {
                 <div>
                     <a asp-action="BuyTicket"
                        asp-controller="Home"
-                       asp-route-place="@(arr[i, j] = ++k)"
+                       asp-route-place="@(((flag = (ListPlace.Contains(k) ? true : false)) == false) ? k:0)"
+                       asp-route-removePlace="@(flag == true ? k:0)"
                        asp-route-id="@ViewBag.raceId"
                        asp-route-returnUrl="@ViewBag.returnUrl"
-                       class="@(ListPlace.Contains(arr[i,j])? "btn btn-warning":
-                                (SoldPlace.Contains(arr[i,j])?"btn btn-success disabled" :"btn btn-danger"))">
-                        @(arr[i, j] = k)
+                       class="@((flag == true) ? "btn btn-warning":
+                                (SoldPlace.Contains(k)?"btn btn-success disabled" :"btn btn-danger"))">@(k)
                     </a>
                 </div>      
                 @if(i==1)
