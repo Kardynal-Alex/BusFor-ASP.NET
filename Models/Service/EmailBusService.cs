@@ -9,7 +9,7 @@ namespace BusFor.Models.Service
     {
         public async Task SendEmailAsync(Passenger passenger,BusInfo busInfo)
         {
-            MailMessage mm = new MailMessage("irakardinal@gmail.com", passenger.Email);
+            MailMessage mm = new MailMessage("email", passenger.Email);
             mm.Subject = "Bus Ticket";
             mm.Body = BodyHtmlText(passenger,busInfo);
             mm.IsBodyHtml = true;
@@ -19,7 +19,7 @@ namespace BusFor.Models.Service
             smtp.Port = 587;
             smtp.EnableSsl = true;
 
-            NetworkCredential nc = new NetworkCredential("irakardinal@gmail.com", "sasha60327");
+            NetworkCredential nc = new NetworkCredential("email", "password");
             //smtp.UseDefaultCredentials = true;
             smtp.Credentials = nc;
             smtp.Send(mm);
